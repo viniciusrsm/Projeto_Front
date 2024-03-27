@@ -1,9 +1,20 @@
 'use client';
 
-export const CriarTarefa: React.FC<Map<string, number>> = (tarefas) => {
+import { Dispatch, SetStateAction } from "react";
+
+interface CriarTarefaProps {
+  setTarefas: Dispatch<SetStateAction<Map<any, any>>>;
+  tarefas: Map<string, number>;
+}
+
+export const CriarTarefa: React.FC<CriarTarefaProps> = (tarefas, setTarefas) => {
     
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
         const formData = new FormData(event.currentTarget);
+        console.log(formData.values().next().value);
+        const f = formData.values().next().value;
+        //setTarefas({...tarefas, 'a':1})
+        setTarefas((existingTarefas: any) => ({...existingTarefas, f:1}));
         event.preventDefault();
         //tarefas.set(formData.values().next().value, 0);
         console.log(tarefas);
